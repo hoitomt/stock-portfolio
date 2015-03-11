@@ -50,6 +50,17 @@ module.exports = function(grunt){
         }]
       }
     },
+    slim: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: 'app/views',
+          src: ['**/*.slim'],
+          dest: 'public',
+          ext: '.html'
+        }]
+      }
+    },
     watch: {
       js: {
         files: ['app/coffeescript/**/*.coffee'],
@@ -62,6 +73,10 @@ module.exports = function(grunt){
       haml: {
         files: ['app/views/**/*.haml'],
         tasks: ['haml']
+      },
+      slim: {
+        files: ['app/views/**/*.slim'],
+        tasks: ['slim']
       }
     }
   });
@@ -72,7 +87,8 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-haml');
+  grunt.loadNpmTasks('grunt-slim');
 
-  grunt.registerTask('build', ['clean', 'coffee', 'sass', 'haml']);
+  grunt.registerTask('build', ['clean', 'coffee', 'sass', 'haml', 'slim']);
   grunt.registerTask('default', ['build', 'connect', 'watch']);
 }
